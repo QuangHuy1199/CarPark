@@ -16,8 +16,14 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/booking-office")
+@RequestMapping("/booking-office") // => @RequestMapping("api/v1/booking-office")
 public class BookingOfficeController {
+    
+    /**
+    @Autowired
+    private BookingOfficeService bookingOfficeService; => NG
+     */
+    
     private final BookingOfficeService bookingOfficeService;
 
     public BookingOfficeController(BookingOfficeService bookingOfficeService) {
@@ -36,11 +42,11 @@ public class BookingOfficeController {
             List<BookingOfficeDTO> bookingOfficeList = bookingOfficeService.getAllBookingOffice();
             response.put("bookingOfficeList", bookingOfficeList);
 
-        } catch (Exception e) {
+        } catch (Exception e) { // => Da catch o service nen branch nay khong vao duoc
             e.printStackTrace();
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR); // => khong can
         }
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        return new ResponseEntity<>(response, HttpStatus.OK); // => always return http OK
     }
 
     /**
